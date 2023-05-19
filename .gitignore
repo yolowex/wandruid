@@ -1,3 +1,10 @@
+__pycache__
+venv
+etc.
+
+core/__pychace__
+core/common/__pycache__
+
 # Gradle files
 .gradle/
 build/
