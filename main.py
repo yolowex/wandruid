@@ -15,7 +15,12 @@ try:
     import asyncio
 
     pg.init()
-    cr.screen = make_screen([9,18],25,SCALED | FULLSCREEN)
+    flags = SCALED | FULLSCREEN
+    if IS_WEB:
+        flags = 0
+
+    cr.screen = make_screen([9,18],25,flags)
+
     cr.event_holder = EventHolder()
 
     cr.event_holder.determined_fps = 0
@@ -40,8 +45,7 @@ try:
             cr.screen.blit(rotated_pic,rect)
 
             pg.display.update()
-
-        await asyncio.sleep(0)
+            await asyncio.sleep(0)
 
     asyncio.run(main_loop())
 
