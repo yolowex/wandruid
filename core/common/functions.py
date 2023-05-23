@@ -71,3 +71,23 @@ def point_in_circle(point, circle_center, circle_radius):
         return True
     else:
         return False
+
+
+import math
+
+def calculate_distance(point1, point2):
+    """
+    Calculates the distance between two points in 2D space.
+
+    Args:
+        point1 (tuple): Coordinates of the first point (x1, y1).
+        point2 (tuple): Coordinates of the second point (x2, y2).
+
+    Returns:
+        float: The distance between the two points.
+    """
+    x1, y1 = point1
+    x2, y2 = point2
+
+    distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    return distance
