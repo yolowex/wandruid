@@ -1,4 +1,4 @@
-from core.common.names import *
+from base.common.names import *
 
 
 class EventHolder :

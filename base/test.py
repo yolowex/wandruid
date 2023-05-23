@@ -1,8 +1,8 @@
-from core.common.names import *
-import core.common.resources as cr
-from core.assets import *
-from core.controls.spectrum import Spectrum
-from core.controls.shock import Shock
+from base.common.names import *
+import base.common.resources as cr
+from base.assets import *
+from base.controls.spectrum import Spectrum
+from base.controls.shock import Shock
 
 class Test:
     def __init__(self):
@@ -14,9 +14,12 @@ class Test:
         self.shock = Shock()
         self.spectrum = Spectrum()
 
+    # todo: fix the conflict EventHolder.fingers mouse conflict
     def check_events( self ):
-        if cr.event_holder.mouse_pressed_keys[2] or (len(cr.event_holder.fingers) > 1
-                                and len(cr.event_holder.tapped_fingers)):
+        held_fingers = [i for i in cr.event_holder.held_fingers if i != -1]
+        tapped_fingers = [i for i in cr.event_holder.tapped_fingers if i != -1]
+
+        if cr.event_holder.mouse_pressed_keys[2] or (len(held_fingers) > 2 and len(tapped_fingers)!=0):
             self.use_shock = not self.use_shock
 
         if self.use_shock:

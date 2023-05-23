@@ -1,6 +1,6 @@
-from core.common.names import *
-import core.common.resources as cr
-from core.common.functions import *
+from base.common.names import *
+import base.common.resources as cr
+from base.common.functions import *
 
 class Spectrum:
     def __init__(self):

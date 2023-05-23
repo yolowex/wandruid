@@ -1,5 +1,5 @@
-from core.common.names import *
-from core.common.constants import *
+from base.common.names import *
+from base.common.constants import *
 
 pics: Dict[str,Surface] = {}
 

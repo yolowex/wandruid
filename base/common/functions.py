@@ -1,4 +1,4 @@
-from core.common.names import *
+from base.common.names import *
 
 def make_screen(aspect_ratio,scale,flags=None) -> Surface:
     ar = aspect_ratio

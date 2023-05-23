@@ -2,17 +2,21 @@ import sys
 import re
 import traceback
 
-from core.controls.spectrum import Spectrum
-from core.test import Test
+from base.controls.spectrum import Spectrum
+from base.test import Test
 
 try:
-    from core.common.names import *
-    import core.assets
-    import core.common.resources as cr
-    from core.common.functions import *
-    from core.assets import *
-    from core.controls.shock import Shock
-    from core.event_holder import EventHolder
+    from base.common.names import *
+    import base.assets
+    import base.common.resources as cr
+    from base.common.functions import *
+    from base.assets import *
+    from base.controls.shock import Shock
+    from base.event_holder import EventHolder
+
+    from gui.menu import Menu
+    from gui.drawables.page import Page
+
 
     import asyncio
 
@@ -27,7 +31,10 @@ try:
 
     cr.event_holder.determined_fps = 0
 
-    core.assets.load_assets()
+    menu = Menu(cr.screen,cr.event_holder)
+
+    base.assets.load_assets()
+
 
     test = Test()
 

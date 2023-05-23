@@ -7,8 +7,8 @@ etc.
 bin
 
 # pycache
-core/__pychace__
-core/common/__pycache__
+base/__pychace__
+base/common/__pycache__
 
 .git
 # Gradle files
