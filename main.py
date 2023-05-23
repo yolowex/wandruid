@@ -3,7 +3,7 @@ import re
 import traceback
 
 from core.controls.spectrum import Spectrum
-
+from core.test import Test
 
 try:
     from core.common.names import *
@@ -29,33 +29,22 @@ try:
 
     core.assets.load_assets()
 
+    test = Test()
+
 
 
 
     async def main_loop():
-        pic = pics['clown'].copy()
-        rotated_pic = pic.copy()
-        angle = 0
 
-        shock = Spectrum()
 
         while not cr.event_holder.should_quit:
             cr.screen.fill("gray")
 
             cr.event_holder.get_events()
-            shock.check_events()
 
+            test.check_events()
+            test.render()
 
-            x = shock.value
-
-            angle = x*-180 if x is not None else angle
-
-            rotated_pic = pg.transform.rotate(pic,angle)
-            rect = rotated_pic.get_rect()
-            rect.center = cr.screen.get_rect().center
-
-            cr.screen.blit(rotated_pic,rect)
-            shock.render()
 
             pg.display.update()
             await asyncio.sleep(0)

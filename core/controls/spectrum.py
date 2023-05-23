@@ -9,12 +9,18 @@ class Spectrum:
         self.finger_id: Optional[int] = None
         self.finger: Optional[Event] = None
 
-
+        self.angle_anchor = 0
+        self.angle_wideness = 180
         self.stick_radius = 7
         self.stick_color = Color("black")
         self.stick_min_color = Color("blue")
         self.stick_max_color = Color('red')
         self.container_color = Color("black")
+
+    @property
+    def angle( self ):
+        x = self.value
+        return (x * -abs(self.angle_wideness)) + self.angle_anchor if x is not None else None
 
 
     @property
