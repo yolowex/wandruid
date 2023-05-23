@@ -8,7 +8,7 @@ class Spectrum:
         self.container_center: Optional[Vector2] = None
         self.finger_id: Optional[int] = None
         self.finger: Optional[Event] = None
-        self.value: float = 0
+
 
         self.stick_radius = 7
         self.stick_color = Color("black")
@@ -24,6 +24,12 @@ class Spectrum:
 
         return Vector2(self.finger.x, self.container_center.y)
 
+    @property
+    def value(self):
+        if self.container_center is None:
+            return None
+
+        return self.normalize_distance
 
     @property
     def normalize_distance( self ) :

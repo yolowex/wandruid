@@ -44,10 +44,11 @@ try:
 
             cr.event_holder.get_events()
             shock.check_events()
-            # angle += cr.event_holder.dt * 10
 
-            x = shock.value * 180
-            angle = x if x is not None else angle
+
+            x = shock.value
+
+            angle = x*-180 if x is not None else angle
 
             rotated_pic = pg.transform.rotate(pic,angle)
             rect = rotated_pic.get_rect()
