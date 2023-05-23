@@ -1,10 +1,9 @@
 from core.common.names import *
 
-
 class EventHolder :
-    def __init__( self ) :
+    def __init__( self,screen:Surface ) :
+        self.screen = screen
         self.events_list: list[Event] = []
-
         self.pressed_keys = []
         self.released_keys = []
         self.held_keys = []
@@ -58,6 +57,9 @@ class EventHolder :
         for i in self.events_list :
             if i.type in [FINGERDOWN , FINGERMOTION]:
                 self.fingers[i.finger_id] = i
+                self.fingers[i.finger_id].x *= self.screen.get_width()
+                self.fingers[i.finger_id].y *= self.screen.get_height()
+
                 self.tapped_fingers.append(i.finger_id)
 
                 if i.finger_id not in self.held_fingers:

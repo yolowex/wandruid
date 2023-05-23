@@ -21,7 +21,7 @@ try:
 
     cr.screen = make_screen([9,18],25,flags)
 
-    cr.event_holder = EventHolder()
+    cr.event_holder = EventHolder(cr.screen)
 
     cr.event_holder.determined_fps = 0
 
