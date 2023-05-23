@@ -29,8 +29,11 @@ class Shock :
 
     @property
     def collide_points( self ) :
-        res = line_circle_collision_point(self.pillar_center, self.container_radius,
-            self.pillar_center, self.finger_pos)
+        res = line_circle_collision_point(
+            self.pillar_center,
+            self.container_radius,
+            self.pillar_center,
+            self.finger_pos)
 
         return res
 
@@ -45,7 +48,7 @@ class Shock :
         v2 = Vector2(self.finger_pos.x - self.pillar_center.x,
             self.finger_pos.y - self.pillar_center.y)
 
-        return v2.angle_to(v1) + 90
+        return v2.angle_to(v1) - 90
 
 
     def check_events( self ) :
@@ -76,6 +79,13 @@ class Shock :
 
     def render( self ) :
         if self.pillar_center is not None :
+            c = self.collide_points
+            # print(type(c))
+            for i in c:
+                # print(type(i),type(d),i,d)
+                # pg.draw.line(cr.screen,"black",Vector2(i[0],i[1]),Vector2(d[0],d[1]),width=1)
+                pg.draw.circle(cr.screen, self.stick_color, i, 3)
+
             pg.draw.circle(cr.screen, self.stick_color, self.finger_pos, self.stick_radius)
             pg.draw.circle(cr.screen, self.container_color, self.pillar_center,
                 self.container_radius, width=3)

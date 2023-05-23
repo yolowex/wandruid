@@ -4,6 +4,8 @@ import sys
 import re
 import traceback
 import random
+import math
+import numpy as np
 from typing import Optional,Union,Dict
 
 # third party
@@ -13,7 +15,7 @@ from pygame import Surface,Vector2,Rect,Color
 from pygame.font import Font,SysFont
 from pygame.event import Event
 
-from sympy import symbols, Eq, solve
+
 
 
 
