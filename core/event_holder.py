@@ -3,10 +3,13 @@ from core.common.names import *
 
 class EventHolder :
     def __init__( self ) :
+        self.events_list: list[Event] = []
+
         self.pressed_keys = []
         self.released_keys = []
         self.held_keys = []
         self.window_focus = True
+        self.fingers:Dict[int,Event] = {}
 
         self.mouse_moved = False
         self.mouse_pos = Vector2(0, 0)
@@ -40,12 +43,20 @@ class EventHolder :
         self.mouse_released_keys = [False, False, False]
 
 
-
         self.mouse_moved = False
         self.final_fps = self.clock.get_fps()
         self.dt = (self.clock.tick(self.determined_fps) / 1000)
 
-        for i in pg.event.get() :
+        self.events_list = pg.event.get()
+        for i in self.events_list :
+            if i.type in [FINGERDOWN , FINGERMOTION]:
+                self.fingers[i.finger_id] = i
+
+            if i.type == FINGERUP:
+                if i.finger_id in self.fingers:
+                    self.fingers.pop(i.finger_id)
+
+
             if i.type == WINDOWFOCUSLOST:
                 self.window_focus = False
             if i.type == WINDOWFOCUSGAINED:
