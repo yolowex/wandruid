@@ -9,7 +9,11 @@ class EventHolder :
         self.released_keys = []
         self.held_keys = []
         self.window_focus = True
+
         self.fingers:Dict[int,Event] = {}
+        self.tapped_fingers:list[int] = []
+        self.held_fingers:list[int] = []
+        self.lifted_fingers:list[int] = []
 
         self.mouse_moved = False
         self.mouse_pos = Vector2(0, 0)
@@ -42,6 +46,9 @@ class EventHolder :
         self.mouse_pressed_keys = [False, False, False]
         self.mouse_released_keys = [False, False, False]
 
+        self.tapped_fingers.clear()
+        self.lifted_fingers.clear()
+
 
         self.mouse_moved = False
         self.final_fps = self.clock.get_fps()
@@ -51,10 +58,19 @@ class EventHolder :
         for i in self.events_list :
             if i.type in [FINGERDOWN , FINGERMOTION]:
                 self.fingers[i.finger_id] = i
+                self.tapped_fingers.append(i.finger_id)
+
+                if i.finger_id not in self.held_fingers:
+                    self.held_fingers.append(i.finger_id)
 
             if i.type == FINGERUP:
                 if i.finger_id in self.fingers:
                     self.fingers.pop(i.finger_id)
+
+                if i.finger_id in self.held_fingers:
+                    self.held_fingers.remove(i.finger_id)
+
+                self.lifted_fingers.append(i.finger_id)
 
 
             if i.type == WINDOWFOCUSLOST:
