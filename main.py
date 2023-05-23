@@ -2,10 +2,12 @@ import sys
 import re
 import traceback
 
-import core.assets
+from core.controls.spectrum import Spectrum
+
 
 try:
     from core.common.names import *
+    import core.assets
     import core.common.resources as cr
     from core.common.functions import *
     from core.assets import *
@@ -35,7 +37,7 @@ try:
         rotated_pic = pic.copy()
         angle = 0
 
-        shock = Shock()
+        shock = Spectrum()
 
         while not cr.event_holder.should_quit:
             cr.screen.fill("gray")
@@ -44,7 +46,7 @@ try:
             shock.check_events()
             # angle += cr.event_holder.dt * 10
 
-            x = shock.finger_angle
+            x = shock.value * 180
             angle = x if x is not None else angle
 
             rotated_pic = pg.transform.rotate(pic,angle)

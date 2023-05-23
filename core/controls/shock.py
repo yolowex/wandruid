@@ -1,18 +1,23 @@
 from core.common.names import *
 import core.common.resources as cr
 from core.common.functions import *
-from core.assets import *
+
 
 # todo: fix type hinting problems
 class Shock :
 
-    def __init__( self ) :
+    def __init__( self ,stick_radius=None,container_radius=None) :
+        if stick_radius is None:
+            stick_radius = 7
+        if container_radius is None:
+            container_radius = stick_radius * 5
+
         self.container_center: Optional[Vector2] = None
         self.finger_id: Optional[int] = None
         self.finger: Optional[Event] = None
 
-        self.stick_radius = 7
-        self.container_radius = self.stick_radius * 5
+        self.stick_radius = stick_radius
+        self.container_radius = container_radius
 
         self.stick_color = Color("black")
         self.stick_max_color = Color('red')
