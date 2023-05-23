@@ -31,9 +31,9 @@ try:
 
 
     async def main_loop():
-        # pic = pics['clown'].copy()
-        # rotated_pic = pic.copy()
-        # angle = 0
+        pic = pics['clown'].copy()
+        rotated_pic = pic.copy()
+        angle = 0
 
         shock = Shock()
 
@@ -42,13 +42,17 @@ try:
 
             cr.event_holder.get_events()
             shock.check_events()
-            shock.render()
             # angle += cr.event_holder.dt * 10
-            # rotated_pic = pg.transform.rotate(pic,angle)
-            # rect = rotated_pic.get_rect()
-            # rect.center = cr.screen.get_rect().center
 
-            # cr.screen.blit(rotated_pic,rect)
+            x = shock.finger_angle
+            angle = x if x is not None else angle
+
+            rotated_pic = pg.transform.rotate(pic,angle)
+            rect = rotated_pic.get_rect()
+            rect.center = cr.screen.get_rect().center
+
+            cr.screen.blit(rotated_pic,rect)
+            shock.render()
 
             pg.display.update()
             await asyncio.sleep(0)
