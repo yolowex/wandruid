@@ -6,3 +6,4 @@ event_holder: Optional[EventHolder] = None
 
 game = None
 menu = None
+camera = None

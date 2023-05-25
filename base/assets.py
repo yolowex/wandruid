@@ -1,9 +1,12 @@
 from base.common.names import *
 from base.common.constants import *
 
-pics: Dict[str,Surface] = {}
+base_pics: Dict[str,Surface] = {}
+base_fonts: Dict[str,Font] = {}
 
 def load_assets():
-    pics['clown'] = pg.image.load(here+"assets/clown.png")
-    pics['boat'] = pg.image.load(here+"assets/boat.png")
-    pics['honey'] = pg.image.load(here+"assets/honey.png")
+    base_pics['clown'] = pg.image.load(here+"assets/clown.png")
+
+
+    base_fonts['big'] = SysFont('Arial',30)
+

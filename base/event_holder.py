@@ -1,3 +1,4 @@
+from base.common.constants import *
 from base.common.names import *
 
 
@@ -62,10 +63,11 @@ class EventHolder :
                 self.fingers[i.finger_id].x *= self.screen.get_width()
                 self.fingers[i.finger_id].y *= self.screen.get_height()
 
-                self.tapped_fingers.append(i.finger_id)
+                if i.type == FINGERDOWN:
+                    self.tapped_fingers.append(i.finger_id)
+                    if i.finger_id not in self.held_fingers :
+                        self.held_fingers.append(i.finger_id)
 
-                if i.finger_id not in self.held_fingers :
-                    self.held_fingers.append(i.finger_id)
 
             if i.type == FINGERUP :
                 if i.finger_id in self.fingers :
@@ -107,34 +109,35 @@ class EventHolder :
             if i.type == MOUSEBUTTONDOWN :
                 self.mouse_pressed_keys = list(pg.mouse.get_pressed())
                 self.mouse_held_keys = list(pg.mouse.get_pressed())
-
-                self.fingers[-1] = pg.event.Event(FINGERMOTION, touch_id=-1, finger_id=-1,
-                    x=i.pos[0], y=i.pos[1])
-                self.tapped_fingers.append(-1)
+                if not IS_ANDROID :
+                    self.fingers[-1] = pg.event.Event(FINGERMOTION, touch_id=-1, finger_id=-1,
+                        x=i.pos[0], y=i.pos[1])
+                    self.tapped_fingers.append(-1)
 
             if i.type == MOUSEBUTTONUP :
                 self.mouse_released_keys = list(pg.mouse.get_pressed())
                 self.mouse_held_keys = list(pg.mouse.get_pressed())
 
+                if not IS_ANDROID:
+                    if -1 in self.fingers:
+                        self.fingers.pop(-1)
 
-                if -1 in self.fingers:
-                    self.fingers.pop(-1)
+                    self.lifted_fingers.append(-1)
 
-                self.lifted_fingers.append(-1)
+                    if -1 in self.tapped_fingers:
+                        self.tapped_fingers.remove(-1)
 
-                if -1 in self.tapped_fingers:
-                    self.tapped_fingers.remove(-1)
-
-                if -1 in self.held_fingers:
-                    self.held_fingers.remove(-1)
+                    if -1 in self.held_fingers:
+                        self.held_fingers.remove(-1)
 
             if i.type == MOUSEMOTION :
-                if self.mouse_held_keys[0] :
-                    self.fingers[-1] = pg.event.Event(FINGERMOTION, touch_id=-1, finger_id=-1,
-                        x=i.pos[0], y=i.pos[1])
+                if not IS_ANDROID :
+                    if self.mouse_held_keys[0] :
+                        self.fingers[-1] = pg.event.Event(FINGERMOTION, touch_id=-1, finger_id=-1,
+                            x=i.pos[0], y=i.pos[1])
 
-                if -1 not in self.held_keys:
-                    self.held_fingers.append(-1)
+                    if -1 not in self.held_keys:
+                        self.held_fingers.append(-1)
 
 
 

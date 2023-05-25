@@ -4,5 +4,5 @@ from base.common.names import *
 here = os.path.abspath(".") + "/"
 
 IS_WEB = __import__("sys").platform == "emscripten"
-IS_ANDROID = False # TBF
+IS_ANDROID = "ANDROID_ARGUMENT" in os.environ
 IS_DESKTOP = False # TBF

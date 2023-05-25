@@ -6,6 +6,8 @@ etc.
 .buildozer
 bin
 
+
+
 # pycache
 base/__pychace__
 base/common/__pycache__

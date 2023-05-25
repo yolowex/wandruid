@@ -6,20 +6,20 @@ from base.controls.shock import Shock
 
 class Test:
     def __init__(self):
-        self.pic = pics['clown'].copy()
+        self.pic = base_pics['clown'].copy()
         self.rotated_pic = self.pic.copy()
         self.angle = 0
 
         self.use_shock = False
         self.shock = Shock()
-        self.spectrum = Spectrum()
+        self.spectrum = Spectrum(Vector2(1,0.1))
 
-    # todo: fix the conflict EventHolder.fingers mouse conflict
+    # done: fix the EventHolder.fingers mouse conflict
     def check_events( self ):
         held_fingers = [i for i in cr.event_holder.held_fingers if i != -1]
         tapped_fingers = [i for i in cr.event_holder.tapped_fingers if i != -1]
 
-        if cr.event_holder.mouse_pressed_keys[2] or (len(held_fingers) > 2 and len(tapped_fingers)!=0):
+        if cr.event_holder.mouse_pressed_keys[2] or (len(held_fingers) > 1 and len(tapped_fingers)!=0):
             self.use_shock = not self.use_shock
 
         if self.use_shock:
