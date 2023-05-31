@@ -19,10 +19,11 @@ class Test:
         held_fingers = [i for i in cr.event_holder.held_fingers if i != -1]
         tapped_fingers = [i for i in cr.event_holder.tapped_fingers if i != -1]
 
+        # todo: find the crash reason while right clicking
         if cr.event_holder.mouse_pressed_keys[2] or (len(held_fingers) > 1 and len(tapped_fingers)!=0):
             self.use_shock = not self.use_shock
 
-        if self.use_shock:
+        elif self.use_shock:
             self.shock.check_events()
 
             x = self.shock.finger_angle
