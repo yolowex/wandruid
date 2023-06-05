@@ -9,9 +9,21 @@ bin
 
 
 # pycache
+## base
 base/__pychace__
 base/common/__pycache__
+base/controls/__pycache__
+## core
+core/__pychace__
+core/common/__pycache__
+core/decors/__pycache__
+core/ldtk/__pycache__
+core/game_objects/__pycache__
+core/ui/__pycache__
+surface_factory/__pycache__
 
+
+dump
 .git
 # Gradle files
 .gradle/
